@@ -1,0 +1,38 @@
+# These are the emails I will be censoring. These emails will be opened and are saved to the following variables:
+email_one = open("email_one.txt", "r").read()
+email_two = open("email_two.txt", "r").read()
+email_three = open("email_three.txt", "r").read()
+email_four = open("email_four.txt", "r").read()
+
+
+telling_terms = ["she", "she's", "personality matrix", "sense of self", "self-preservation", "learning algorithms", "learning algorithm", "learning", "researchers", 
+"algorithms", "system", "her", "here", "herself", "offline"]
+
+negative_terms = ["concerned", "behind", "danger", "dangerous", "alarming", "alarmingly", "alarmed", "out of control", "help", "unhappy", "bad", "upset", 
+"awful", "broken", "damage", "damaging", "dismal", "distressing", "distressed", "concerning", "horrible", "horribly", "questionable", "wrong turns", "spiral", 
+"destroy", "unpredictable", "lockdown", "alive", "unconcious", "dead"]
+
+title_terms = ["francine", "board of investors", "helena", "helena's", "phil"]
+
+all_terms = telling_terms + negative_terms + title_terms
+
+
+def censored(email, terms):
+
+  email_in_lower = email.lower()
+  email = list(email)
+  for phrase in terms:
+    phrase_index = 0
+    while phrase_index < len(email):
+      phrase_index = email_in_lower.find(phrase, phrase_index)
+      if phrase_index == -1:
+        break
+      for i in range(phrase_index, phrase_index + len(phrase)):
+          email[i] = '*'
+      phrase_index += len(phrase)
+  new_email = ''.join(email)
+
+  return new_email
+
+#print(email_one
+#print(censored(email_one, all_terms))
